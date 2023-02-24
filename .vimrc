@@ -13,8 +13,12 @@ call plug#begin()
 	Plug 'https://github.com/terryma/vim-multiple-cursors'
 call plug#end()
 
-inoremap <C-i> <Esc>
-nnoremap <C-i> i
+nmap <c-s> :w<CR>
+nmap <c-q> :q!<CR>
+imap <c-s> <Esc>:w<CR>a
+
+inoremap <C-w> <ESC>
+nnoremap <C-w> i
 
 map h <insert>
 map i <Up>
