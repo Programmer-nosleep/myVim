@@ -7,12 +7,14 @@ call plug#begin()
 	Plug 'terryma/vim-multiple-cursors'
 	Plug 'bfrg/vim-cpp-modern'
 	Plug 'vim-scripts/c.vim'
+	Plug 'wolfgangmehner/c-support'
 	Plug 'mattn/emmet-vim'
 	Plug 'tpope/vim-commentary'
-	" Plug 'kyazdani42/nvim-web-devicons'
-	" Plug 'romgrk/barbar.nvim'
 	Plug 'ap/vim-buftabline'
-	" Plug 'sirver/ultisnips'
+	Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf'
+	" Plug 'SirVer/ultisnips'
+	Plug 'honza/vim-snippets'
 	" Plug 'cdelledonne/vim-cmake'
 	Plug 'pacha/vem-tabline'
 	Plug 'junegunn/vim-easy-align'
@@ -22,8 +24,6 @@ call plug#begin()
 	Plug 'neoclide/coc.nvim'
 	Plug 'vim-airline/vim-airline'
 	Plug 'ryanoasis/vim-devicons'
-	Plug 'https://github.com/preservim/tagbar'
-	Plug 'https://github.com/terryma/vim-multiple-cursors'
 call plug#end()
 
 nmap <c-s> :w<CR>
@@ -39,9 +39,16 @@ map j <Left>
 map k <Down>
 
 nnoremap <leader>n :NERDTreeFocus<CR>
-
 nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <C-f> :Files<CR>
+nnoremap <C-g> :Buffer<CR>
+
+" let g:python_host_prog = trim('/usr/bin/' . system('readlink /usr/bin/python'))
+" let g:python3_host_prog = trim('/usr/local/bin/' . system('readlink /usr/local/bin/python3'))
+
+nmap <silent> <CR> <Plug>(coc-range-select)
+xmap <silent> <CR> <Plug>(coc-range-select)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -50,6 +57,9 @@ endfunction
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+inoremap <expr> <TAB> pumvisible() ? "<C-y>" : "<TAB>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 
 let g:airline_theme = "tokyonight"
 
@@ -96,10 +106,17 @@ nnoremap <leader>8 :8tabnext<CR>
 nnoremap <leader>9 :9tabnext<CR>
 
 nnoremap <C-p> :bnext<CR>
+nnoremap <C-w> :bprev<CR>
+
+nmap <c-x> <Plug>vem_delete_buffer-
 
 let g:vem_tabline_show = 1
 
 nmap <C-_> <Plug>CommentaryLine
+nmap <C-_> <Plug>Commentary
+
+xmap <C-_> <Plug>Commentary
+omap <C-_> <Plug>Commentary
 
 syntax on
 set number
